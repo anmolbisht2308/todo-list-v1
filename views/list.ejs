@@ -5,20 +5,33 @@
     <div style="background-image: url('/public/css/imgtodo.jpg');">
 
 
+        <div class="random id="heading">
+            <h1>WELCOME TO YOUR TODO-LIST</h1>
+        </div>
+
     <div class="box" id="heading">
         <h1><%= listTitle %></h1>
     </div>
     
 <div class="box">
+
+    <% newListItems.forEach(function(item){ %>
+        <form action="/delete" method="post">
+        <div class="item">
+            <input type="checkbox" name="checkbox" value="<%= item._id %>"onchange="this.form.submit()">
+            <p><%= item.name %></p>
+        </div>
+        <input type="hidden" name="listName" value="<%= listTitle %>"></input>
+    </form>
+    
+    
+        <%  })%>
    
        
-        <% for(var i=0;i<newListItems.length;i++) { %>
-            <div class="item">
-                <input type="checkbox">
-                <p><%= newListItems[i] %></p>
-            </div>
+         
+            
               
-        <%  }%>
+        
 
         <form class="item" action="/" method="post">
             <input type="text" name="newItems" placeholder="Add Items"  autocomplete="off">
